@@ -3,7 +3,9 @@ import 'package:meals_app/screens/filters_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   final Function updateState;
-  MainDrawer(this.updateState);
+  final Map<String, bool> filterConfig;
+
+  MainDrawer({this.updateState, this.filterConfig});
 
   Widget buildListTile(String title, IconData icon, Function tapHandler) {
     return ListTile(
@@ -58,8 +60,8 @@ class MainDrawer extends StatelessWidget {
               Navigator.of(context)
                   .pushReplacementNamed(FiltersScreen.routeName)
                   .then((_) {
-                    print('filterdrawer closed --------');
-                    updateState;
+                    print('filter drawer closed --------');
+                    updateState(filterConfig);
                   });
             },
           ),

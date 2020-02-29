@@ -8,7 +8,7 @@ class FiltersScreen extends StatefulWidget {
   final Map<String, bool> filterConfig;
   final Function updateState;
 
-  FiltersScreen(this.filterConfig, this.updateState);
+  FiltersScreen({this.filterConfig, this.updateState});
 
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
@@ -22,7 +22,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   @override
   void initState() {
-    
     glutenFree = widget.filterConfig['gluten'];
     vegetarian = widget.filterConfig['vegetarian'];
     vegan = widget.filterConfig['vegan'];
@@ -40,6 +39,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
           onChanged: (newValue) {
             setState(() {
               glutenFree = newValue;
+              widget.filterConfig['gluten'] = newValue;
             });
           },
         );
@@ -52,6 +52,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
           onChanged: (newValue) {
             setState(() {
               vegetarian = newValue;
+              widget.filterConfig['vegetarian'] = newValue;
             });
           },
         );
@@ -63,6 +64,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
           onChanged: (newValue) {
             setState(() {
               vegan = newValue;
+              widget.filterConfig['vegan'] = newValue;
             });
           },
         );
@@ -74,6 +76,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
           onChanged: (newValue) {
             setState(() {
               lactoseFree = newValue;
+              widget.filterConfig['lactose'] = newValue;
             });
           },
         );
@@ -88,7 +91,10 @@ class _FiltersScreenState extends State<FiltersScreen> {
       appBar: AppBar(
         title: Text('Filters'),
       ),
-      drawer: MainDrawer(widget.updateState),
+      drawer: MainDrawer(
+        filterConfig: widget.filterConfig,
+        updateState: widget.updateState,
+      ),
       body: Column(
         children: <Widget>[
           Container(

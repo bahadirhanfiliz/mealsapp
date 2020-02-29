@@ -5,7 +5,9 @@ import 'package:meals_app/widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   final Function updateState;
-  TabsScreen(this.updateState);
+    final Map<String, bool> filterConfig;
+
+  TabsScreen({this.filterConfig, this.updateState});
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
@@ -30,7 +32,7 @@ class _TabsScreenState extends State<TabsScreen> {
       appBar: AppBar(
         title: Text(pages[selectedPageIndex]['title'] as String),
       ),
-      drawer: MainDrawer(widget.updateState),
+      drawer: MainDrawer(filterConfig: widget.filterConfig, updateState: widget.updateState),
       body: pages[selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
           onTap: selectPage,

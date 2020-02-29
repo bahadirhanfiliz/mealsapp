@@ -62,11 +62,11 @@ class _MyAppState extends State<MyApp> {
                     fontFamily: 'RobotoCondensed',
                     fontWeight: FontWeight.bold),
               )),
-      home: TabsScreen(updateMealList),
+      home: TabsScreen(filterConfig: filterSelection, updateState: updateMealList,),
       routes: {
         MealsScreen.routeName: (context) => MealsScreen(mealList),
         MealDetailScreen.routeName: (context) => MealDetailScreen(),
-        FiltersScreen.routeName: (context) => FiltersScreen(filterSelection, updateMealList),
+        FiltersScreen.routeName: (context) => FiltersScreen(filterConfig: filterSelection,updateState: updateMealList),
       },
       // 404 unknown page
       onUnknownRoute: (settings) {
