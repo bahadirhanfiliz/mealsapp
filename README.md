@@ -4,6 +4,7 @@ A simple Flutter App which displays recipes for several categories.
 
 ## Sample Screenshots
 
+Here are a sample of screenshots from the application.
 
 **Main Page** | **Meal Page** | **Meal Page Deatil Page**
 ------------ | ------------- | -------------
