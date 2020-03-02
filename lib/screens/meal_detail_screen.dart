@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/models/meal.dart';
 
-class MealDetailScreen extends StatelessWidget {
+class MealDetailScreen extends StatefulWidget {
   static const routeName = '/meal-detail';
+
+  final List<Meal> favoritesList;
+  final Function addOrRemoveFavoritesList;
+
+  MealDetailScreen({@required this.favoritesList, @required this.addOrRemoveFavoritesList});
+
+  @override
+  _MealDetailScreenState createState() => _MealDetailScreenState();
+}
+
+class _MealDetailScreenState extends State<MealDetailScreen> {
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
@@ -36,6 +47,16 @@ class MealDetailScreen extends StatelessWidget {
         title: Text(
           meal.title,
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            widget.addOrRemoveFavoritesList(meal);
+          });
+        },
+        child: widget.favoritesList.indexOf(meal) != -1
+        ? Icon(Icons.star)
+        : Icon(Icons.star_border),
       ),
       body: SingleChildScrollView(
         child: Column(

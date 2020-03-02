@@ -17,6 +17,20 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   List<Meal> mealList = DUMMY_MEALS;
 
+  List<Meal> favoritesList = [];
+
+  void addOrRemoveFavoritesList(Meal candidateMeal) {
+    setState(() {
+      var index = favoritesList.indexOf(candidateMeal);
+      if (index >= 0) {
+        favoritesList.removeAt(index);
+      } else {
+        favoritesList.add(candidateMeal);
+      }
+    });
+    print("----" + favoritesList.toString());
+  }
+
   Map<String, bool> filterSelection = {
     'gluten': false,
     'lactose': false,
@@ -26,14 +40,15 @@ class _MyAppState extends State<MyApp> {
 
   void updateMealList(Map<String, bool> filterSelectionData) {
     setState(() {
-      print('Setstate action triggered ------------');
+      print('Set state action triggered ------------');
       filterSelection = filterSelectionData;
 
       mealList = DUMMY_MEALS.where((meal) {
         if (filterSelection['gluten'] && !meal.isGlutenFree) return false;
         if (filterSelection['lactose'] && !meal.isLactoseFree) return false;
         if (filterSelection['vegan'] && !meal.isVegan) return false;
-        if (filterSelection['vegetarian'] && !meal.isVegetarian) return false;
+        if (filterSelection['vegetarian'] && !meal.isVegetarian)
+          return false;
         else
           return true;
       }).toList();
@@ -62,11 +77,18 @@ class _MyAppState extends State<MyApp> {
                     fontFamily: 'RobotoCondensed',
                     fontWeight: FontWeight.bold),
               )),
-      home: TabsScreen(filterConfig: filterSelection, updateState: updateMealList,),
+      home: TabsScreen(
+        favoritesList: favoritesList,
+        filterConfig: filterSelection,
+        updateState: updateMealList,
+      ),
       routes: {
         MealsScreen.routeName: (context) => MealsScreen(mealList),
-        MealDetailScreen.routeName: (context) => MealDetailScreen(),
-        FiltersScreen.routeName: (context) => FiltersScreen(filterConfig: filterSelection,updateState: updateMealList),
+        MealDetailScreen.routeName: (context) => MealDetailScreen(
+            favoritesList: favoritesList,
+            addOrRemoveFavoritesList: addOrRemoveFavoritesList),
+        FiltersScreen.routeName: (context) => FiltersScreen(
+            filterConfig: filterSelection, updateState: updateMealList),
       },
       // 404 unknown page
       onUnknownRoute: (settings) {

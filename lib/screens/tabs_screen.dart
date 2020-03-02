@@ -1,22 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/models/meal.dart';
 import 'package:meals_app/screens/categories_screen.dart';
 import 'package:meals_app/screens/favorites_screen.dart';
 import 'package:meals_app/widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   final Function updateState;
-    final Map<String, bool> filterConfig;
+  final Map<String, bool> filterConfig;
+  final List<Meal> favoritesList;
 
-  TabsScreen({this.filterConfig, this.updateState});
+  TabsScreen(
+      {this.filterConfig, this.updateState, @required this.favoritesList});
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  final List<Map<String, Object>> pages = [
-    {'page': CategoriesScreen(), 'title': 'Categories'},
-    {'page': FavoritesScreen(), 'title': 'Favorites'},
-  ];
+  List<Map<String, Object>> pages;
+
+  @override
+  void initState() {
+    pages = [
+      {'page': CategoriesScreen(), 'title': 'Categories'},
+      {
+        'page': FavoritesScreen(
+          favoritesList: widget.favoritesList,
+        ),
+        'title': 'Favorites'
+      },
+    ];
+    super.initState();
+  }
 
   int selectedPageIndex = 0;
 
@@ -32,7 +46,8 @@ class _TabsScreenState extends State<TabsScreen> {
       appBar: AppBar(
         title: Text(pages[selectedPageIndex]['title'] as String),
       ),
-      drawer: MainDrawer(filterConfig: widget.filterConfig, updateState: widget.updateState),
+      drawer: MainDrawer(
+          filterConfig: widget.filterConfig, updateState: widget.updateState),
       body: pages[selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
           onTap: selectPage,
