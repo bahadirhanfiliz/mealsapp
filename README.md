@@ -5,12 +5,12 @@ A simple Flutter App which displays recipes for several categories.
 ## Sample Screenshots
 Main Page
 ![Main Page - Category]
-(https://prnt.sc/ragdd4)
+(https://i.imgur.com/ET13zmP.png)
 
 Meal Page
 ![Meal Page]
-(https://prnt.sc/rageou)
+(https://i.imgur.com/F5cSXkj.png)
 
 Meal Detail Page
 ![Meal Detail Page]
-(https://prnt.sc/ragfcc)
+(https://i.imgur.com/ls6Xwx6.png)
