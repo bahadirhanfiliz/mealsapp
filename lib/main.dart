@@ -28,7 +28,6 @@ class _MyAppState extends State<MyApp> {
         favoritesList.add(candidateMeal);
       }
     });
-    print("----" + favoritesList.toString());
   }
 
   Map<String, bool> filterSelection = {
