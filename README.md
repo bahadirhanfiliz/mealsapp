@@ -4,7 +4,7 @@ A simple Flutter App which displays recipes for several categories.
 
 ## Sample Screenshots
 Main Page
-![Main Page - Category](https://i.imgur.com/ET13zmP.png =100x20)
+<img src="https://i.imgur.com/ET13zmP.png" alt="Main Page - Category" width="200" height="600/>
 
 Meal Page
 ![Meal Page](https://i.imgur.com/F5cSXkj.png =100x20)
